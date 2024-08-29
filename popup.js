@@ -79,18 +79,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function syncKeywords() {
-    chrome.storage.sync.get('keywords', (data) => {
-      const keywords = data.keywords || [];
-      chrome.storage.sync.set({ keywords }, () => {
-        if (chrome.runtime.lastError) {
-          console.error('Error syncing keywords:', chrome.runtime.lastError);
-        } else {
-          console.log('Keywords synced successfully');
-        }
-      });
-    });
-  }
-  setInterval(syncKeywords, 12 * 60 * 60 * 1000); // sync every 12 hours
-
 });
