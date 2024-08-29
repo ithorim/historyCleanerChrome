@@ -79,4 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Add keyword on Enter key press
+  keywordInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent form submission if it's in a form
+      addKeywordButton.click(); // Simulate a click on the add keyword button
+    }
+  });
 });
