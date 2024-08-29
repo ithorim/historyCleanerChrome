@@ -10,3 +10,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       });
     }
   });
+
+chrome.storage.onChanged.addListener((changes, namespace) => {
+  if (namespace === 'sync' && changes.keywords) {
+    console.log('Keywords updated:', changes.keywords.newValue);
+    // You can perform any necessary actions here when keywords are updated
+  }
+});

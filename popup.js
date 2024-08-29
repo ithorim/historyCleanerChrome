@@ -39,8 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!keywords.includes(keyword)) {
           keywords.push(keyword);
           chrome.storage.sync.set({ keywords }, () => {
-            updateKeywordList(keywords);
-            keywordInput.value = '';
+            if (chrome.runtime.lastError) {
+              console.error('Error saving keyword:', chrome.runtime.lastError);
+            } else {
+              updateKeywordList(keywords);
+              keywordInput.value = '';
+            }
           });
         }
       });
@@ -74,4 +78,19 @@ document.addEventListener('DOMContentLoaded', () => {
       keywordList.appendChild(li);
     });
   }
+
+  function syncKeywords() {
+    chrome.storage.sync.get('keywords', (data) => {
+      const keywords = data.keywords || [];
+      chrome.storage.sync.set({ keywords }, () => {
+        if (chrome.runtime.lastError) {
+          console.error('Error syncing keywords:', chrome.runtime.lastError);
+        } else {
+          console.log('Keywords synced successfully');
+        }
+      });
+    });
+  }
+  setInterval(syncKeywords, 12 * 60 * 60 * 1000); // sync every 12 hours
+
 });
