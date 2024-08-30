@@ -9,7 +9,7 @@ History Cleaner is a browser extension that deletes history items containing spe
 - Clean history based on the specified keywords.
 - Toggle between dark and light modes.
 - Persistent storage of keywords and theme preference.
-- Sync between google devices (wip).
+- [ ] ~~Sync between google devices (wip).~~
 
 ## Installation
 
